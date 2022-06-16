@@ -276,15 +276,32 @@ df_questions_scores = pd.merge(df_questions, df_scores,
 df_questions_scores.info()
 print(df_questions_scores.head())
 
+## Get the corresponding criteria
+df_criteria = pd.read_csv('../data/questions/criteria.csv', index_col = 0)
+df_criteria.info()
+print(df_criteria.head())
+
+# Merge the two data frames
+df_questions_scores_criteria = pd.merge(df_questions_scores, df_criteria,
+                               left_on = 'criterion',
+                               right_on = '_id', 
+                               suffixes=("_questions_scores", "_criteria"))
+df_questions_scores_criteria = df_questions_scores_criteria.rename(columns = {'name':'criterion_name', 
+                                                                              'description':'criterion_description'}, errors="raise")
+df_questions_scores_criteria.info()
+print(df_questions_scores_criteria.head())
+
 # retain what we need for now
-_id = np.arange(0, len(df_questions_scores)).tolist()
-df_questions_scores['_id'] = _id
-df_save = df_questions_scores[['_id', 
-                               'text', 
-                               'questions_cleaned', 
-                               'criterion', 
-                               'score', 
-                               'subject']].to_csv('../tmp/questions_preanal.csv', index = False)
+_id = np.arange(0, len(df_questions_scores_criteria)).tolist()
+df_questions_scores_criteria['_id'] = _id
+df_save = df_questions_scores_criteria[['_id', 
+                                        'text', 
+                                        'questions_cleaned', 
+                                        'criterion', 
+                                        'score', 
+                                        'subject',
+                                        'criterion_name',
+                                        'criterion_description']].to_csv('../tmp/questions_preanal.csv', index = False)
 
 
 
