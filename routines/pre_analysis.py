@@ -238,7 +238,7 @@ axs.text(0.75, 0.95,'The optimum number of clusters is {}'.format(optimum_n_clus
          transform = axs.transAxes, fontproperties = font0)
 fig.suptitle('Silhouette scores obtained for different numbers of Kmeans clusters', fontproperties = font0)
 plt.tight_layout()
-plt.show()
+plt.savefig('../tmp/silhouette_scores_kmean.pdf')
 
 # fitting the KMeans
 kmeans = cluster.KMeans(n_clusters=optimum_n_clusters, init = 'k-means++', n_init = 50)
@@ -258,7 +258,7 @@ axs.set_xlabel('PCA axis one', fontproperties = font0)
 axs.set_ylabel('PCA axis two', fontproperties = font0)
 fig.suptitle('2D projection of the clusters of subjects', fontproperties = font0)
 plt.tight_layout()
-plt.show()
+plt.savefig('../tmp/PCA_clusters.pdf')
 
 # save the results
 df_questions['subject'] = kmeans.labels_
@@ -301,7 +301,3 @@ df_save = df_questions_scores_criteria[['_id',
                                         'subject',
                                         'criterion_name',
                                         'criterion_description']].to_csv('../tmp/questions_preanal.csv', index = False)
-
-
-
-pdb.set_trace()
