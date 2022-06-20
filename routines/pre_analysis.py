@@ -297,7 +297,6 @@ df_questions_scores_criteria['_id'] = _id
 df_save = df_questions_scores_criteria[['_id', 
                                         'text', 
                                         'questions_cleaned', 
-                                        'criterion', 
                                         'score', 
                                         'subject',
                                         'criterion_name',
